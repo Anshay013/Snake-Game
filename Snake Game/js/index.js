@@ -8,7 +8,7 @@ let speed = 10;
 let score = 0;
 let lastPaintTime = 0;
 let snakeArr = [
-    {x: 25, y: 25}
+    {x: 20, y: 20}
 ];
 
 food = {x: 6, y: 7};
@@ -31,7 +31,7 @@ function crash(snake) {
         }
     }
     // crash into wall
-    if(snake[0].x >= 20 || snake[0].x <=0 || snake[0].y >= 20 || snake[0].y <=0){
+    if(snake[0].x >= 27 || snake[0].x <=0 || snake[0].y >= 27 || snake[0].y <=0){
         return true;
     }
         
@@ -41,11 +41,11 @@ function crash(snake) {
 function gameEngine(){
     
     if(crash(snakeArr)){
-        gameOverSound.play();
         musicSound.pause();
+        gameOverSound.play();
         inputDir =  {x: 0, y: 0}; 
         alert("GAME OVER !!. Play Again!");
-        snakeArr = [{x: 13, y: 15}];
+        snakeArr = [{x: 20, y: 20}];
         musicSound.play();
         score = 0; 
     }
@@ -62,7 +62,7 @@ function gameEngine(){
         scoreBox.innerHTML = "MyScore: " + score;
         snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
         let a = 2;
-        let b = 16;
+        let b = 25;
         food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())} // generating random position for food
     }
 
@@ -70,7 +70,7 @@ function gameEngine(){
     for (let i = snakeArr.length - 2; i>=0; i--) { 
         snakeArr[i+1] = {...snakeArr[i]};
     }
-
+       // updating head of snake both x and y adding current inputDirection.
     snakeArr[0].x += inputDir.x;
     snakeArr[0].y += inputDir.y;
 
@@ -114,7 +114,7 @@ else{
 
 window.requestAnimationFrame(main);
 window.addEventListener('keydown', e =>{
-    inputDir = {x: 0, y: 0} // Startin coordinates
+    inputDir = {x: 0, y: 0} // initially not moving (Start)
     moveSound.play();
     switch (e.key) {
         case "ArrowUp":
