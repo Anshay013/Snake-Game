@@ -24,13 +24,13 @@ function main(ctime) {
 }
 
 function crash(snake) {
-    // If you bump into yourself 
+    // eat itself 
     for (let i = 1; i < snakeArr.length; i++) {
         if(snake[i].x === snake[0].x && snake[i].y === snake[0].y){
             return true;
         }
     }
-    // If you bump into the wall
+    // crash into wall
     if(snake[0].x >= 20 || snake[0].x <=0 || snake[0].y >= 20 || snake[0].y <=0){
         return true;
     }
@@ -89,7 +89,7 @@ function gameEngine(){
         }
         board.appendChild(snakeElement);
     });
-    // Display the food
+    // food
     foodElement = document.createElement('div');
     foodElement.style.gridRowStart = food.y;
     foodElement.style.gridColumnStart = food.x;
@@ -114,7 +114,7 @@ else{
 
 window.requestAnimationFrame(main);
 window.addEventListener('keydown', e =>{
-    inputDir = {x: 0, y: 1} // Start the game
+    inputDir = {x: 0, y: 0} // Startin coordinates
     moveSound.play();
     switch (e.key) {
         case "ArrowUp":
